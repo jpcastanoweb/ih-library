@@ -28,7 +28,6 @@ app.get("/", (req, res) => {
 /* 
     4. SERVIDOR
 */
-
 app.listen(process.env.PORT, () => {
   console.log("Servidor conectado")
 })
