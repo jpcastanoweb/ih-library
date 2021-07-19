@@ -74,7 +74,6 @@ app.get("/search", (req, res) => {
 
 app.post("/search", (req, res) => {
   const valorFormulario = req.body
-  console.log(valorFormulario)
   res.redirect(
     `/search?palabra=${valorFormulario.palabra}&nombre=${valorFormulario.nombre}&apellido=${valorFormulario.apellido}`
   )
