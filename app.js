@@ -6,6 +6,7 @@ const express = require("express")
 const app = express()
 const hbs = require("hbs")
 const mongoose = require("mongoose")
+const bodyParser = require("body-parser")
 
 const Book = require("./models/Book")
 
@@ -27,6 +28,7 @@ mongoose
   )
   .catch((e) => console.log(e))
 
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"))
 app.set("view engine", "hbs")
 
@@ -41,7 +43,6 @@ app.get("/", (req, res) => {
 app.get("/books", (req, res) => {
   Book.find({})
     .then((booksFound) => {
-      //   console.log("Books found: ", booksFound)
       res.render("books", {
         books: booksFound,
       })
@@ -52,17 +53,31 @@ app.get("/books", (req, res) => {
 })
 
 app.get("/books/:bookId", (req, res) => {
-  console.log("Este es el req params: ", req.params)
   const { bookId } = req.params
 
   Book.findById(bookId)
     .then((bookFound) => {
-      console.log(bookFound)
       res.render("singleBook", {
         book: bookFound,
       })
     })
     .catch((e) => console.log(e))
+})
+
+app.get("/search", (req, res) => {
+  const queries = req.queries
+
+  res.render("search", {
+    busqueda: req.query,
+  })
+})
+
+app.post("/search", (req, res) => {
+  const valorFormulario = req.body
+  console.log(valorFormulario)
+  res.redirect(
+    `/search?palabra=${valorFormulario.palabra}&nombre=${valorFormulario.nombre}&apellido=${valorFormulario.apellido}`
+  )
 })
 
 /* 

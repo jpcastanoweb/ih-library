@@ -84,7 +84,6 @@ const books = [
 
 Book.create(books)
   .then(() => {
-    console.log("Se generaron los libros")
     mongoose.connection.close()
   })
   .catch((e) => console.log("Hubo un error", e))
