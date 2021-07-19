@@ -1,0 +1,22 @@
+<h1>Editar Libro</h1>
+<hr />
+<form action="/books/{{libro._id}}/edit" method="POST">
+    <label for="">Titulo: 
+        <input type="text" name="title" value="{{libro.title}}" />
+    </label>
+    <br />
+    <label for="">Autor: 
+        <input type="text" name="author" value="{{libro.author}}" />
+    </label>
+    <br />
+    <label for="">Descripcion: 
+        <textarea type="text" cols="60" rows="10" name="description">{{libro.description}}</textarea>
+    </label>
+    <br />
+    <label for="">Rating: 
+        <input type="number" min="1" max="10" name="rating" value="{{libro.rating}}" />
+    </label>
+    <button type="submit" id="submit-edit-btn">
+        Salvar cambios
+    </button>
+</form>
